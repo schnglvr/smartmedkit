@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smartmedkitimnida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5fafd;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+    width: 100%;
+    background-image: url('https://i.pinimg.com/736x/81/ee/00/81ee0076a778b3c0c15893f25dc9a96b.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    color: #004d40; /* Updated to a dark teal color */
+    margin-bottom: 60px;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-top: 10px;
+    color: #004d40; 
+}
+
+
+        main {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+
+        .symptom-category {
+            background-color: #f1f8f6;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .symptom-category h3 {
+            font-size: 2rem;
+            color: #00796b;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #00796b;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        label:hover {
+            color: #004d40;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        button {
+            background-color: #00796b;
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s;
+            margin-top: 30px;
+            align-self: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+
+        .results {
+            margin-top: 50px;
+        }
+
+        .treatment {
+            background-color: #e0f2f1;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #00796b;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .treatment h4 {
+            font-size: 1.8rem;
+            color: #004d40;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .treatment p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #004d40;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            width: 100%;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        footer i {
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Smart Medkit</h1>
+        <p>Provides simple knowledge and treatments for common illnesses and first aid</p>
+    </header>
+    <main>
+        <section id="symptom-checker">
+            <h2>What's Bothering You?</h2>
+            <p>Choose your symptoms to get a quick diagnosis:</p>
+            <form id="symptomForm">
+                <div class="symptom-category">
+                    <h3>Common Illnesses</h3>
+                    <label><input type="checkbox" name="symptom" value="fever"> Fever</label>
+                    <label><input type="checkbox" name="symptom" value="cough"> Cough</label>
+                    <label><input type="checkbox" name="symptom" value="sore throat"> Sore Throat</label>
+                    <label><input type="checkbox" name="symptom" value="headache"> Headache</label>
+                    <label><input type="checkbox" name="symptom" value="runny nose"> Runny Nose</label>
+                    <label><input type="checkbox" name="symptom" value="chills"> Chills</label>
+                    <label><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label>
+                    <label><input type="checkbox" name="symptom" value="nausea"> Nausea</label>
+                    <label><input type="checkbox" name="symptom" value="allergies"> Allergies</label>
+                </div>
+
+                <div class="symptom-category">
+                    <h3>Injuries</h3>
+                    <label><input type="checkbox" name="symptom" value="cut"> Cut</label>
+                    <label><input type="checkbox" name="symptom" value="burn"> Burn</label>
+                    <label><input type="checkbox" name="symptom" value="bruise"> Bruise</label>
+                    <label><input type="checkbox" name="symptom" value="swelling"> Swelling</label>
+                    <label><input type="checkbox" name="symptom" value="sprained_ankle"> Sprained Ankle</label>
+                </div>
+
+                <button type="button" onclick="diagnose()">Get Diagnosis</button>
+            </form>
+
+            <div id="diagnosisResults" class="results"></div>
+        </section>
+
+        <footer>
+            <p><b>Note:</b> This tool is not yet proven. Please consult healthcare professionals if necessary. <i>Stay safe!</i></p>
+        </footer>
+    </main>
+
+    <script>
+        const conditions = [
+            {
+                "name": "Common Cold",
+                "symptoms": ["fever", "cough", "sore throat"],
+                "info": "A viral infection that targets the upper respiratory system, causing sneezing, nasal congestion, coughing, and general discomfort.",
+                "treatment": "Stay hydrated, rest, and take over-the-counter medications like paracetamol.",
+                "tools": ["Warm water", "Salt (for gargling)", "Honey", "Ginger", "Lemon"]
+            },
+            {
+                "name": "Gastroenteritis",
+                "symptoms": ["nausea", "fever", "headache", "fatigue"],
+                "info": "A stomach infection usually caused by contaminated food or water, leading to diarrhea, stomach cramps, and dehydration.",
+                "treatment": "Rehydrate with clear fluids or homemade oral rehydration solutions and avoid greasy or spicy foods.",
+                "tools": ["Boiled water", "Salt and sugar (for ORS)", "Bananas", "Plain rice"]
+            },
+            {
+                "name": "Sinus Infection",
+                "symptoms": ["headache", "fever", "runny nose", "fatigue"],
+                "info": "An inflammation of the sinuses often due to a cold or allergies, causing pressure and congestion around the face and head.",
+                "treatment": "Relieve congestion with steam inhalation and warm compresses. Use saline water to rinse the nose.",
+                "tools": ["Bowl of hot water", "Towel (for steam inhalation)", "Salt (for saline rinse)", "Washcloth (warm compress)"]
+            },
+            {
+                "name": "Seasonal Allergies",
+                "symptoms": ["runny nose", "sore throat", "cough", "fatigue"],
+                "info": "An overreaction of the immune system to allergens like pollen or dust, leading to sneezing, itching, and a runny nose.",
+                "treatment": "Limit exposure to allergens, use saline sprays, and take antihistamines (to relieve symptoms caused by allergic reactions) if necessary.",
+                "tools": ["Salt (for saline spray)", "Clean water", "Face mask", "Vacuum cleaner"]
+            },
+            {
+                "name": "Heat Exhaustion",
+                "symptoms": ["fatigue", "headache", "chills"],
+                "treatment": "Cool down by drinking water, resting in the shade, and using wet towels to lower body temperature.",
+                "info": "A condition caused by excessive heat exposure, leading to dehydration and overheating symptoms.",
+                "tools": ["Cold water", "Wet cloth or towel", "Fan", "Homemade electrolyte drink"]
+            },
+            {
+                "name": "Mild Dehydration",
+                "symptoms": ["fatigue", "headache", "nausea"],
+                "treatment": "Drink plenty of fluids, ideally with some electrolytes, and consume water-rich fruits.",
+                "info": "Occurs when the body loses more fluids than it takes in, often due to heat or physical activity.",
+                "tools": ["Water", "Pinch of salt and sugar (for rehydration mix)", "Cucumber", "Watermelon"]
+            },
+            {
+                "name": "Minor Cuts",
+                "symptoms": ["cut"],
+                "treatment": "Wash the wound thoroughly, apply antiseptic, and cover with a clean bandage.",
+                "info": "A break in the skin often caused by sharp objects, which can lead to bleeding and risk of infection.",
+                "tools": ["Clean water", "Soap", "Clean cloth", "Adhesive bandage"]
+            },
+            {
+                "name": "Minor Burns",
+                "symptoms": ["burn"],
+                "treatment": "Cool the burn under running water for 10–15 minutes and apply soothing aloe vera or honey.",
+                "info": "A skin injury caused by heat, such as hot surfaces or sun exposure, resulting in redness and pain.",
+                "tools": ["Running water", "Aloe vera (if available)", "Honey", "Clean cloth"]
+            },
+            {
+                "name": "Sprained Ankle",
+                "symptoms": ["swelling", "bruise", "sprained ankle"],
+                "treatment": "Rest the injured foot, apply ice to reduce swelling, and elevate it to minimize pain.",
+                "info": "An injury to the ligaments of the ankle due to twisting or rolling, causing pain and limited movement.",
+                "tools": ["Ice cubes in a plastic bag", "Towel (to wrap the ice)", "Cushion or pillow (for elevation)"]
+            },
+            {
+                "name": "Tension Headache",
+                "symptoms": ["headache", "fatigue"],
+                "treatment": "Relax in a quiet room, apply a cool cloth to the forehead, and drink plenty of water.",
+                "info": "A common headache caused by stress or muscle strain in the neck and shoulders, often relieved by rest.",
+                "tools": ["Cold water", "Soft cloth (for compress)", "Glass of water", "Essential oil (if available, like lavender)"]
+            },
+            {
+                "name": "Mild Sunburn",
+                "symptoms": ["burn", "chills", "fatigue"],
+                "treatment": "Cool the affected area with water, apply soothing aloe vera or yogurt, and stay hydrated.",
+                "info": "Skin irritation from overexposure to sunlight, leading to redness, pain, and peeling.",
+                "tools": ["Running water", "Aloe vera or yogurt", "Hat or umbrella (to prevent further exposure)"]
+            }
+        ];
+
+        function diagnose() {
+            const symptoms = document.querySelectorAll('input[name="symptom"]:checked');
+            const selectedSymptoms = Array.from(symptoms).map(symptom => symptom.value);
+
+            const results = selectedSymptoms.reduce((acc, symptom) => {
+                const matchedConditions = conditions.filter(condition =>
+                    condition.symptoms.includes(symptom) && !acc.some(item => item.name === condition.name)
+                );
+                return [...acc, ...matchedConditions];
+            }, []);
+
+            const resultsDiv = document.getElementById('diagnosisResults');
+            resultsDiv.innerHTML = '';
+
+            if (results.length > 0) {
+                results.forEach(condition => {
+                    const conditionDiv = document.createElement('div');
+                    conditionDiv.classList.add('treatment');
+                    conditionDiv.innerHTML = `
+                        <h4>${condition.name}</h4>
+                        <p><strong>Symptoms:</strong> ${condition.symptoms.join(', ')}</p>
+                        <p><strong>Info:</strong> ${condition.info}</p>
+                        <p><strong>Treatment:</strong> ${condition.treatment}</p>
+                        <p><strong>Suggested Tools:</strong> ${condition.tools.join(', ')}</p>
+                    `;
+                    resultsDiv.appendChild(conditionDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>No conditions match your symptoms. Please consult a healthcare provider.</p>';
+            }
+        }
+    </script>
+</body>
+
+</html>
