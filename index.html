@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medhelp</title>
+
+<body>
+<header>
+  <h1>Smart Medical Kit: Your Health Assistant</h1>
+</header>
+<main>
+  <input type="text" id="searchBar" placeholder="Search by symptom or illness name (e.g., 'fever', 'cold')">
+  <button onclick="searchIllness()">Search</button>
+ <footer><p><b>Note:</b> This tool is not yet proven. Please consult healthcare professionals if necessary. <i>Stay safe!</i></p>
+        </footer>
+  <section id="results">
+    <!-- Search results will be displayed here -->
+  </section>
+</main>
+</body>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  main {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  section {
+    margin-top: 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  li strong {
+    font-size: 1.2rem;
+  }
+  li p {
+    margin: 5px 0;
+  }
+</style>
+<script>
+  const illnessesDatabase = [
+    {
+      name: "Common Cold",
+      symptoms: ["fever", "cough", "sore throat"],
+      info: "A viral infection that targets the upper respiratory system.",
+      treatment: "Stay hydrated, rest, and take over-the-counter medications like paracetamol.",
+      prevention: "Wash hands frequently, avoid close contact with sick people.",
+      tools: ["Warm water", "Salt (for gargling)", "Honey", "Ginger", "Lemon"],
+      source: "https://www.mayoclinic.org/diseases-conditions/common-cold/symptoms-causes/syc-20351605"
+    },
+    {
+      name: "Heat Exhaustion",
+      symptoms: ["high fever", "nausea", "confusion", "dizziness"],
+      info: "A condition caused by prolonged exposure to high temperatures.",
+      treatment: "Move to a cool environment, hydrate immediately, and use wet towels to lower body temperature.",
+      prevention: "Stay hydrated, avoid extreme heat, and wear light clothing.",
+      tools: ["Cold water", "Wet towels", "Electrolyte drinks"],
+      source: "https://www.cdc.gov/disasters/extremeheat/warning.html"
+    },
+    {
+      name: "Minor Cuts and Scrapes",
+      symptoms: ["cut", "bleeding"],
+      info: "A break in the skin often caused by sharp objects, leading to bleeding and risk of infection.",
+      treatment: "Wash thoroughly with clean water, apply antiseptic, and cover with a bandage.",
+      prevention: "Use protective gear when handling sharp objects.",
+      tools: ["Clean water", "Soap", "Antiseptic", "Bandage"],
+      source: "https://www.nhs.uk/conditions/cuts-and-grazes/"
+    },
+    {
+      name: "Mild Burns",
+      symptoms: ["redness", "pain", "blisters"],
+      info: "Skin injury caused by heat, resulting in redness and pain.",
+      treatment: "Cool the burn under running water for 10–15 minutes and apply aloe vera or honey.",
+      prevention: "Use gloves or mitts when handling hot objects.",
+      tools: ["Running water", "Aloe vera", "Honey", "Clean cloth"],
+      source: "https://www.webmd.com/first-aid/tc/first-aid-burns-treatment-overview"
+    },
+    {
+      name: "Seasonal Allergies",
+      symptoms: ["sneezing", "itchy eyes", "runny nose"],
+      info: "An overreaction of the immune system to allergens like pollen or dust.",
+      treatment: "Take antihistamines and avoid allergen exposure.",
+      prevention: "Keep windows closed during high pollen seasons.",
+      tools: ["Antihistamines", "Saline spray", "Vacuum cleaner"],
+      source: "https://www.aafa.org/allergy-facts/"
+    },
+    {
+      name: "Stomach Ache",
+      symptoms: ["abdominal pain", "bloating"],
+      info: "Discomfort in the stomach area, often caused by overeating or indigestion.",
+      treatment: "Drink warm water, avoid greasy foods, and take antacids if needed.",
+      prevention: "Eat smaller meals and avoid spicy foods.",
+      tools: ["Warm water", "Ginger tea", "Antacid"],
+      source: "https://www.healthline.com/symptom/stomach-pain"
+    },
+    {
+      name: "Food Poisoning",
+      symptoms: ["nausea", "vomiting", "diarrhea"],
+      info: "An illness caused by consuming contaminated food or drinks.",
+      treatment: "Rehydrate, avoid solid foods initially, and consume bland foods.",
+      prevention: "Cook food thoroughly and practice good hygiene.",
+      tools: ["ORS solution", "Boiled water", "Plain rice"],
+      source: "https://www.cdc.gov/foodsafety/symptoms.html"
+    },
+    {
+      name: "Mild Dehydration",
+      symptoms: ["thirst", "dry mouth", "fatigue"],
+      info: "A condition where the body loses more water than it takes in.",
+      treatment: "Drink plenty of water and eat water-rich foods.",
+      prevention: "Stay hydrated, especially in hot weather.",
+      tools: ["Water", "Cucumber", "Watermelon"],
+      source: "https://www.medicalnewstoday.com/articles/dehydration"
+    },
+    {
+      name: "Tension Headache",
+      symptoms: ["headache", "neck pain", "fatigue"],
+      info: "A common type of headache caused by stress or muscle tension.",
+      treatment: "Relax in a quiet room, apply a cold compress, and stay hydrated.",
+      prevention: "Practice good posture and manage stress.",
+      tools: ["Cold compress", "Water", "Essential oils"],
+      source: "https://www.mayoclinic.org/diseases-conditions/tension-headache/symptoms-causes/syc-20373224"
+    },
+    {
+      name: "Insect Bite",
+      symptoms: ["itching", "redness", "swelling"],
+      info: "Skin irritation caused by insect stings or bites.",
+      treatment: "Wash the area, apply ice, and use anti-itch cream.",
+      prevention: "Use insect repellent and wear protective clothing.",
+      tools: ["Ice pack", "Anti-itch cream", "Soap"],
+      source: "https://www.nhs.uk/conditions/insect-bites-and-stings/"
+    },
+    {
+      name: "Nosebleed",
+      symptoms: ["bleeding from the nose"],
+      info: "Bleeding caused by irritation or injury to the nasal lining.",
+      treatment: "Pinch the nostrils and lean forward to stop bleeding.",
+      prevention: "Keep nasal passages moist with saline spray.",
+      tools: ["Saline spray", "Tissue", "Cold compress"],
+      source: "https://www.medicalnewstoday.com/articles/249443"
+    },
+    {
+      name: "Constipation",
+      symptoms: ["difficulty passing stool", "abdominal discomfort"],
+      info: "A condition where bowel movements are infrequent or hard to pass.",
+      treatment: "Increase fiber intake, drink plenty of water, and exercise regularly.",
+      prevention: "Maintain a balanced diet rich in fruits and vegetables.",
+      tools: ["Water", "Fiber supplements", "Prunes"],
+      source: "https://www.healthline.com/health/constipation"
+    }
+ ];
+
+  function searchIllness() {
+    const query = document.getElementById('searchBar').value.toLowerCase();
+    const results = illnessesDatabase.filter(illness =>
+      illness.name.toLowerCase().includes(query) ||
+      illness.symptoms.some(symptom => symptom.includes(query))
+    );
+
+    const resultContainer = document.getElementById('results');
+    resultContainer.innerHTML = results.length > 0
+      ? `<h3>Search Results:</h3><ul>${results.map(illness => `
+          <li>
+            <strong>${illness.name}</strong>
+            <p><em>Description:</em> ${illness.info}</p>
+            <p><strong>Symptoms:</strong> ${illness.symptoms.join(', ')}</p>
+            <p><strong>Treatment:</strong> ${illness.treatment}</p>
+            <p><strong>Prevention:</strong> ${illness.prevention}</p>
+            <p><strong>Tools:</strong> ${illness.tools.join(', ')}</p>
+            <p><strong>Source:</strong> <a href="${illness.source}" target="_blank">Learn more</a></p>
+          </li>`).join('')}</ul>`
+      : "<p>No results found for your search. Please try different keywords.</p>";
+  }
+</script>
+</head>
+
+</html>
